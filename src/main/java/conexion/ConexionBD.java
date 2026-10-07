@@ -14,5 +14,14 @@ import java.sql.SQLException;
 public final class ConexionBD {
 
     private static final String URL = "jdbc:postgreesql://localhost:5432/tienda_ramiro";
+    private static final String USUARIO = "tienda_app";
+    private static final String PASSWORD = "tienda1234";
+
+    private ConexionBD(){
+    }
+
+    public static Connection obtenerConexion() throws SQLException{
+        return DriverManager.getConnection(URL, USUARIO, PASSWORD);
+    }
 
 }

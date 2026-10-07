@@ -15,5 +15,39 @@ import java.util.List;
  */
 public class ClienteDAO {
 
+    public List<Cliente> listar() throws SQLException{
+        List<Cliente> resultado = new ArrayList<>();
+
+        String sql = """ 
+                SELECT id, nombre, email
+                FROM cliente 
+                ORDER BY id 
+                """;
+
+        try(Connection con = ConexionBD.obtenerConexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();){
+
+            while(rs.next()){
+                resultado.add(new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("email"),
+                        rs.getBoolean("activo")
+                ));
+            }
+
+
+
+        }
+
+        return resultado;
+
+    }
+
+
+
+
+
 
 }
